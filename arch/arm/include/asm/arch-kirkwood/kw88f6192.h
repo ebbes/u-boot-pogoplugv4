@@ -8,14 +8,17 @@
  * SPDX-License-Identifier:	GPL-2.0+
  */
 
-#ifndef _CONFIG_KW88F6192_H
-#define _CONFIG_KW88F6192_H
+#ifndef _ASM_ARCH_KW88F6192_H
+#define _ASM_ARCH_KW88F6192_H
 
-/* SOC specific definations */
+/* SOC specific definitions */
 #define KW88F6192_REGS_PHYS_BASE	0xf1000000
 #define KW_REGS_PHY_BASE		KW88F6192_REGS_PHYS_BASE
 
-/* TCLK Core Clock defination */
-#define CONFIG_SYS_TCLK	  166000000 /* 166MHz */
+/* TCLK Core Clock definition */
+/* TCLK Core Clock definition */
+#ifndef CONFIG_SYS_TCLK
+#define CONFIG_SYS_TCLK	166000000 /* 166MHz */
+#endif
 
-#endif /* _CONFIG_KW88F6192_H */
+#endif /* _ASM_ARCH_KW88F6192_H */
