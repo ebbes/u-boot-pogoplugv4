@@ -31,6 +31,9 @@
 #include <asm/arch/mpp.h>
 #include <asm/io.h>
 #include "pogo_v4.h"
+#ifdef CONFIG_KIRKWOOD_MMC
+#include <kirkwood_mmc.h>
+#endif /* CONFIG_KIRKWOOD_MMC */
 
 DECLARE_GLOBAL_DATA_PTR;
 
@@ -131,3 +134,10 @@ void reset_phy(void)
 }
 #endif /* CONFIG_RESET_PHY_R */
 
+#ifdef CONFIG_KIRKWOOD_MMC
+int board_mmc_init(bd_t *bis)
+{
+	kw_mmc_initialize(bis);
+	return 0;
+}
+#endif /* CONFIG_KIRKWOOD_MMC */
