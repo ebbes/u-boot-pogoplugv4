@@ -49,9 +49,12 @@
 #define CONFIG_SYS_NO_FLASH		/* Declare no flash (NOR/SPI) */
 #define CONFIG_SYS_MVFS
 #include <config_cmd_default.h>
+#define CONFIG_CMD_BOOTZ
 #define CONFIG_CMD_DHCP
 #define CONFIG_CMD_ENV
+#define CONFIG_CMD_IDE
 #define CONFIG_CMD_MII
+#define CONFIG_CMD_MD5SUM
 #define CONFIG_CMD_MMC
 #define CONFIG_CMD_NAND
 #define CONFIG_CMD_PING
@@ -133,6 +136,14 @@
 #define CONFIG_LZO
 
 /*
+ * SATA
+ */
+#ifdef CONFIG_MVSATA_IDE
+#define CONFIG_SYS_ATA_IDE0_OFFSET	MV_SATA_PORT0_OFFSET
+#undef CONFIG_SYS_ATA_IDE1_OFFSET	/* Does not have a second port */
+#endif
+
+/*
  * Device Tree
  */
 #define CONFIG_OF_LIBFDT
@@ -150,11 +161,5 @@
 #define CONFIG_CMD_SNTP
 #define CONFIG_CMD_DNS
 #endif /* CONFIG_CMD_DATE */
-
-/*
- * bootz and md5sum commands
- */
-#define CONFIG_CMD_BOOTZ
-#define CONFIG_CMD_MD5SUM
 
 #endif /* _CONFIG_POGO_V4_H */
