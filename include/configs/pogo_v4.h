@@ -140,7 +140,7 @@
  */
 #ifdef CONFIG_MVSATA_IDE
 #define CONFIG_SYS_ATA_IDE0_OFFSET	MV_SATA_PORT0_OFFSET
-#undef CONFIG_SYS_ATA_IDE1_OFFSET	/* Does not have a second port */
+#define CONFIG_SYS_ATA_IDE1_OFFSET	MV_SATA_PORT1_OFFSET
 #endif
 
 /*
