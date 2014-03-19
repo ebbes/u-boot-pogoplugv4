@@ -283,6 +283,21 @@ static u32 kw_mmc_get_base_clock(void)
 }
 #endif /* #if 0 */
 
+static inline u32 kw_mmc_get_base_clock()
+{
+	/* get MMC base clock. If any logic other than just returning
+	 * a fixed value is ever used, remove inline modifier. */
+
+	/* Possible values:
+	 *  - KW_MMC_BASE_FAST_CLOCK   (166 MHz)
+	 *  - KW_MMC_BASE_FAST_CLK_100 (100 MHz)
+	 *  - KW_MMC_BASE_FAST_CLK_200 (200 MHz)
+	 *
+	 * Tests have shown that 200 MHz is more reliable than
+	 * 166 MHz, so this value is used. */
+	return KW_MMC_BASE_FAST_CLK_200;
+}
+
 static void kw_mmc_set_clk(unsigned int clock)
 {
 	unsigned int m;
@@ -294,7 +309,7 @@ static void kw_mmc_set_clk(unsigned int clock)
 		kwsd_write(SDIO_XFER_MODE, SDIO_XFER_MODE_STOP_CLK);
 		kwsd_write(SDIO_CLK_DIV, KW_MMC_BASE_DIV_MAX);
 	} else {
-		m = KW_MMC_BASE_FAST_CLOCK / (2 * clock) - 1;
+		m = kw_mmc_get_base_clock() / (2 * clock) - 1;
 		if (m > KW_MMC_BASE_DIV_MAX)
 			m = KW_MMC_BASE_DIV_MAX;
 #ifdef DEBUG
@@ -421,7 +436,7 @@ int kw_mmc_initialize(bd_t *bis)
 	mmc->voltages = MMC_VDD_32_33 | MMC_VDD_33_34;
 	mmc->host_caps = MMC_MODE_4BIT | MMC_MODE_HS;
 
-	mmc->f_min = KW_MMC_BASE_FAST_CLOCK/KW_MMC_BASE_DIV_MAX;
+	mmc->f_min = kw_mmc_get_base_clock()/KW_MMC_BASE_DIV_MAX;
 	mmc->f_max = KW_MMC_CLOCKRATE_MAX;
 
 	mmc_register(mmc);
