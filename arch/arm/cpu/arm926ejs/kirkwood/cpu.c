@@ -254,7 +254,14 @@ static void kw_sysrst_check(void)
 int print_cpuinfo(void)
 {
 	char *rev;
-	u16 devid = (readl(KW_REG_PCIE_DEVID) >> 16) & 0xffff;
+	u16 devid;
+#ifndef CONFIG_KW88F6192
+	devid = (readl(KW_REG_PCIE_DEVID) >> 16) & 0xffff;
+#else
+	/* KW88F6192 is not correctly determined, so force correct SoC.
+	 * Note that this is just eye-candy during U-Boot initialization */
+	devid = 0x6192;
+#endif
 	u8 revid = readl(KW_REG_PCIE_REVID) & 0xff;
 
 	if ((readl(KW_REG_DEVICE_ID) & 0x03) > 2) {
