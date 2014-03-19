@@ -103,8 +103,8 @@
 	"bootm 0x00800000 0x01100000"
 
 #define CONFIG_EXTRA_ENV_SETTINGS \
-	"mtdparts=mtdparts=orion_nand:1M(u-boot),4M(uImage)," \
-	"32M(rootfs),-(data)\0"\
+	"mtdparts=mtdparts=orion_nand:2M(u-boot),3M(uImage)," \
+	"3M(uImage2),8M(failsafe),112M(root)\0"\
 	"mtdids=nand0=orion_nand\0"\
 	"bootargs_console=console=ttyS0,115200\0" \
 	"bootcmd_usb=usb start; ext2load usb 0:1 0x00800000 /uImage; " \
