@@ -283,7 +283,7 @@ static u32 kw_mmc_get_base_clock(void)
 }
 #endif /* #if 0 */
 
-static inline u32 kw_mmc_get_base_clock()
+static inline u32 kw_mmc_get_base_clock(void)
 {
 	/* get MMC base clock. If any logic other than just returning
 	 * a fixed value is ever used, remove inline modifier. */
